@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Edit options</title>
+    <meta name="csrf-token" content="<%= csrf %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body style="background-color: rgb(182, 247, 217);;">
+    <div class="grid grid-cols-6">
+        <div class="col-start-3 col-span-2">
+            <span class="text-2xl font-dark ">Edit Option</span>
+          <form action="/elections/<%= election.id %>/questions/<%= question.id %>/options/<%= option.id %>/edit" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrf %>"> 
+        <div class="py-3"> 
+           <input  type="text" name="optionname" value="<%= option.optionname %>" placeholder="optionname" class="border border-gray-300 text-gray-900 rounded p-2 w-full">
+        </div>  
+        <div class="py-3"> 
+           <button type="submit" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-5 py-2">Modify</button>        
+        </div>
+        <div class="py-3">
+          <a href="/getelections/addoption/<%= election.id %>/<%= question.id %>/options" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-5 py-2">Cancel</a>
+        </div>  
+        </form>
+        <% if(messages && messages.error && messages.error.length > 0)  { %>
+            <% for(var i=0; i<messages.error.length; i++) { %>
+              <p class="bg-red-200 my-3 list-none rounded px-4 py-2"><%= messages.error[i] %></p>
+            <% } %>
+          <% } %>
+        </div>
+    </div>
+  </body>
+</html>

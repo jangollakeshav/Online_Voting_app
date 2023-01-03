@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title><%= title %></title>
+</head>
+<body  style="background-color: rgb(182, 247, 217);">
+    <div>
+       <b>
+        <a href="/elections" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-5 py-2 justify-right">Go Back</a>
+    </b>
+   </div>
+    <div>
+        <% if (election.ended) { %>
+            <b>
+            <div class="bg-red-300 text-red-900 p-2 rounded-lg shadow">
+                <center>
+              Election Ended
+            </center>
+            </div>
+        </b>
+          <% } else if (election.launched) { %>
+            <b>
+            <div class="bg-green-300 text-green-900 p-2 rounded-lg shadow">
+                <center>
+                Election is Live 
+            </center>
+            </div>
+           </b>
+            <div>
+            <b> Voter can visit this link to vote :</b>
+            <a href="/externalpage/<%=publicurl%>/"  class="py-1 hover:text-purple-blue text-blue-600" target="_blank">https://vineeth-voting-application.onrender.com/externalpage/<%=publicurl%></a>
+        </div>
+            <% } %>
+    </div>
+    </div>
+    <div class="grid grid-cols-6">
+        <div class="col-start-3 col-span-2">
+        <h3 class="text-2xl my-4 font-medium"><%= title %> Election Page</h3>
+        <div class="my-8">
+            <h2 class="my-2 text-lg text-black flex gap-1">Questions<span class="bg-blue-100 ml-2 px-2"> <%= countquestions %> </span></h2>
+            <a href="/questions/<%= id %>" class="py-1 hover:text-black-800 text-black-600">Manage questions</a>
+        </div>
+        <div class="my-8">
+            <h2 class="my-2 text-lg text-black flex gap-1">Voters<span class="bg-blue-100 ml-2 px-2"> <%= countvoters %> </span></h2>
+            <a href="/voters/<%=id %>" class="py-1 hover:text-black-800 text-black-600">Manage voters</a>
+        </div>
+        <div>
+            <a href="/election/<%=id%>/launch" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-5 py-2">Launch election</a>
+        </div>
+
+        </div>
+        <div>
+            <a href="/election/<%= election.id %>/previewelection" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-5 py-2">Preview Election</a>
+                </div>
+                <div><a href="" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded px-5 py-2">Preview Result</a></div>
+        </div>
+        &nbsp&nbsp
+    </div>
+    <div class="grid grid-cols-6">
+        <div class="col-start-3 col-span-2">
+    <div>
+        <a href="" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-8 py-2"> End election</a>
+    </div>
+        </div>
+    </div>
+    </table>
+    <p style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center"> <% if(messages && messages.error && messages.error.length > 0)  { %>
+        <% for(var i=0; i<messages.error.length; i++) { %>
+          <p class="bg-red-200 my-3 list-none rounded px-4 py-2"><%= messages.error[i] %></p>
+        <% } %>
+      <% } %></p>
+</body>
+</html>

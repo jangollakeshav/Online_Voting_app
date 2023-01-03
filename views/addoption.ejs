@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<%= csrfToken %>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+        function deleteOption(id) {
+            fetch(`/${id}/deleteoptions`, {
+                method: "delete",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify({
+                    "_csrf":token
+                })
+            }).then((res)=>{
+                if (res.ok) {
+                    window.location.reload();
+                }
+            }).catch((err)=> console.error(err))
+        }
+    </script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title><%= title %></title>
+    <style>
+        span {
+          display: block;
+        }
+        </style>
+</head>
+<body style="background-color: rgb(182, 247, 217);">
+    <b>
+        <a href="/questions/<%= id%>" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-5 py-2 justify-right">Go Back</a>
+       </b>
+    <div class="grid grid-cols-6">
+        <div class="col-start-2 col-span-4">
+            <span class="text-2xl font-dark ">Question : <%= title %></span>
+            <span class="text-black-800">Description : <%= description %></span>
+            <div class="ml-12">
+                <ol class="list-decimal">
+                    <% for(let i=0; i<option.length; i++) { %>
+                        <li class="option-item">
+                            <div class="flex justify-between items-center w-full my-2 px-2 py-1">
+                                <p class="ml-2 text-lg "><%= option[i].optionname %></p>
+                                <div class="flex gap-2 ">
+                                <div class="rounded w-fit px-2 py-1 flex gap-2">                                                                          
+                                    <a href="/elections/<%=id%>/questions/<%=questionID%>/options/<%=option[i].id%>/edit" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-3 py-1.5 justify-right">Edit</a>
+                                </div>
+                                <div class="rounded w-fit px-2 py-1 flex gap-2">
+                                              
+                                    <a onclick="deleteOption(<%= option[i].id %>)" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-3 py-1.5 justify-right">Delete</a>
+                                </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% } %>
+                </ol>
+            </div>
+          <form action="/getelections/addoption/<%=id%>/<%= questionID %>/options" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="py-3">
+           <input type="text" name="optionname" placeholder="Enter an option"  class="border border-gray-300 text-gray-900 rounded p-2 w-full">
+        </div>  
+        <div class="py-3"> 
+           <button type="submit" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-5 py-2">Add Option</button>        
+        </div>  
+        </form>
+        <b>
+            <p class=" justify-center" align="center"><%= (option.length==0)?"No options are added yet!!":"" %></p>
+        </b>
+        <% if(messages && messages.error && messages.error.length > 0)  { %>
+            <% for(var i=0; i<messages.error.length; i++) { %>
+              <p class="bg-red-200 my-3 list-none rounded px-4 py-2"><%= messages.error[i] %></p>
+            <% } %>
+          <% } %>
+        </div>
+    </div>
+  </body>
+</html>

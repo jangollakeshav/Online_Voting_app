@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="<%= csrfToken %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+        function removevoter(id) {
+            fetch(`/${id}/voterdelete`, {
+                method: "delete",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify({
+                    "_csrf":token
+                })
+            }).then((res)=>{
+                if (res.ok) {
+                    window.location.reload();
+                }
+            }).catch((err)=> console.error(err))
+        }
+    </script>
+    <title><%= title %></title>
+</head>
+<body  style="background-color: rgb(182, 247, 217);"">
+            <div class="grid grid-cols-6">
+                <div class="col-start-3 col-span-2">
+            <center>
+                <b>
+            <h5 class="text-3xl"><%= title %> Voters-List</h5>
+        </b>
+            </center>
+                </div>
+            </div>
+            <div class="bg-black-600 px-2 py-1 hover:bgblack-600">
+                <b>
+            </b>
+                   <a href="/electionslist/<%=id%>" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-5 py-2 justify-right">Go Back</a>
+                   <a href="/newvoter/<%=id%>" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-5 py-2">Add New Voter</a>
+            </div>
+        </div>
+        <div class="flex-auto">
+            <div class="mx-4">  
+                <div class="grid grid-cols-6">
+                    <div class="col-start-3 col-span-2">
+                    <b>
+                <p class="text-black-600"><%= (voters.length==0)?"Not added any Voters Yet!":"" %></p>
+            </b>
+                <ol class="list-decimal" type="1">
+                    <% for (let i=0; i<voters.length; i++) { %>
+                        <li>
+                            
+                            <div class="flex justify-between items-center w-full my-2 px-2">
+                                <div>
+                                    <a href="" class="my-2 text-lg text-black-600 "><%= voters[i].voterid %></a>
+                                </div>
+                                <div class="flex gap-2 text-600" align="center">
+                                    <div class="rounded w-fit px-2 py-1 flex gap-2 cursor-pointer hover:text-600">
+        
+                                        <a href="/elections/<%=election.id%>/voter/<%=voters[i].id%>/edit" class="text-white bg-green-600 hover:bg-green-800 font-medium rounded px-3 py-1.5">Edit passowrd</a>
+                                    </div>
+                                     <% if((voters.length) >1) {%> 
+                                    <div class="rounded w-fit px-2 py-1 flex gap-2 cursor-pointer hover:text-600">    
+                                        <a onclick="removevoter(<%= voters[i].id %>)" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded px-3 py-1.5">Delete</a>
+                                         <%} %>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% } %>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
