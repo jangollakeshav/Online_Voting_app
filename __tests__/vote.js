@@ -452,8 +452,8 @@ describe("Voting application test suite", function () {
     res = await agent.get(`/newvoter/${latestElection.id}`);
     csrfToken = extractCsrfToken(res);
     let response = await agent.post(`/newvoter/${latestElection.id}`).send({
-      voterid: "vineeth",
-      password: "vineeth123",
+      voterid: "keshavulu",
+      password: "keshavulu123",
       electionID: latestElection.id,
       _csrf: csrfToken,
     });
@@ -462,7 +462,7 @@ describe("Voting application test suite", function () {
 
   test("Preview election", async () => {
     const agent = request.agent(server);
-    await login(agent, "vineeth@test.com", "12345678");
+    await login(agent, "keshavulu@test.com", "12345678");
     let res = await agent.get("/addquestion");
     let csrfToken = extractCsrfToken(res);
     await agent.post("/elections").send({
