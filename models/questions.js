@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequeliz");
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class questions extends Model {
     static countquestions(electionID) {
