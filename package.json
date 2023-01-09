@@ -1,5 +1,5 @@
 {
-  "name": "online-voting-application",
+  "name": "Online_Voting-app",
   "version": "1.0.0",
   "description": "Online Voting Application",
   "main": "index.js",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vineeth-07/Online_Voting_Application.git"
+    "url": "git+https://github.com/jangollakeshav/Online_Voting_app.git"
   },
   "author": "Vineeth",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vineeth-07/Online_Voting_Application/issues"
+    "url": "https://github.com/jangollakeshav/Online_Voting_app/issues"
   },
-  "homepage": "https://github.com/Vineeth-07/Online_Voting_Application#readme",
+  "homepage": "https://github.com/jangollakeshav/Online_Voting_app#readme",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.12",
     "eslint": "^8.30.0",
