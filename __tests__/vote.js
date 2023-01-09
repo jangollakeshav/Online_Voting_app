@@ -112,7 +112,7 @@ describe("Voting application test suite", function () {
 
   test("Deleting question", async () => {
     const agent = request.agent(server);
-    await login(agent, "vineeth@test.com", "12345678");
+    await login(agent, "keshavulu@test.com", "12345678");
 
     let res = await agent.get("/addquestion");
     let csrfToken = extractCsrfToken(res);
