@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: yellow;
+  background: white;
 }
 .blink {
   animation: blink 1s steps(1, end) infinite;
