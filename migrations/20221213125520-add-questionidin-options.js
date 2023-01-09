@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn("options", "questions", {
       type: Sequelize.DataTypes.INTEGER,
-      onDelete: "CASCAD",
+      onDelete: "CASCADE",
     });
 
     await queryInterface.addConstraint("options", {
