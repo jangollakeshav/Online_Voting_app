@@ -1,6 +1,6 @@
 "use strict";
 
-const fs = require("f");
+const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const process = require("process");
