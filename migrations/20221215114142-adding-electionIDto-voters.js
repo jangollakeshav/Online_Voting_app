@@ -1,6 +1,6 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
+/** @type {import('sequelize-cli').Migratio} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
